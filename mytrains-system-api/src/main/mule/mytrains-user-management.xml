@@ -110,6 +110,16 @@ payload]]></ee:set-payload>
 	subid: attributes.uriParams.subid
 }]]]></db:input-parameters>
 		</db:update>
+		<ee:transform doc:name="Java to Json" doc:id="3fdd19f4-880a-4b97-85ce-ad2579401f9f" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+  message: "Unsubscribed Successfully"
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
 		<json-logger:logger doc:name="flowEnd" doc:id="db3a6a48-ea2d-4850-82ca-29e06cd35bb5" config-ref="jsonLoggerConfig" message="Payload at the end of flow"/>
 	</flow>
 </mule>
