@@ -40,7 +40,7 @@ assert_expression_payload::main({payload: payload, attributes: attributes, vars:
 			</munit-tools:assert>
 		</munit:validation>
 	</munit:test>
-	<munit:test name="get:\users\(id)\subscription:myTrainsSystemApiConfig-test" doc:id="a4043e76-b857-4abe-9397-62dd13247ec3" >
+	<munit:test name="get-users-subscription-flow-positive-test" doc:id="a4043e76-b857-4abe-9397-62dd13247ec3" >
 		<munit:behavior >
 			<munit-tools:mock-when doc:name="Mock mytrains-retrieve-subscription-flow" doc:id="a606242c-4473-47ad-829f-2202f1c3077c" processor="flow-ref">
 				<munit-tools:with-attributes >
@@ -74,7 +74,7 @@ assert_expression_payload::main({payload: payload, attributes: attributes, vars:
 			</munit-tools:assert>
 		</munit:validation>
 	</munit:test>
-	<munit:test name="get:\users\(id):myTrainsSystemApiConfig-test" doc:id="7de33d66-3d93-419b-9c55-0b2ddc4c689f" >
+	<munit:test name="get-user-byid-positive-test" doc:id="7de33d66-3d93-419b-9c55-0b2ddc4c689f" >
 		<munit:behavior >
 			<munit-tools:mock-when doc:name="Mock mytrains-user-retrieve-flow" doc:id="9a2cbf98-5470-491f-ba16-bbe61c899d5e" processor="flow-ref">
 				<munit-tools:with-attributes >
@@ -108,7 +108,7 @@ assert_expression_payload::main({payload: payload, attributes: attributes, vars:
 			</munit-tools:assert>
 		</munit:validation>
 	</munit:test>
-	<munit:test name="post:\users:application\json:myTrainsSystemApiConfig-test" doc:id="f69625ca-aa11-4b05-b0db-339bbda1a81c" >
+	<munit:test name="post-users-positive-test" doc:id="f69625ca-aa11-4b05-b0db-339bbda1a81c" >
 		<munit:behavior >
 			<munit-tools:mock-when doc:name="Mock mytrains-user-registration-flow" doc:id="1e7d01ae-b9bb-45f9-9c95-7a3abce4f634" processor="flow-ref">
 				<munit-tools:with-attributes >
@@ -141,7 +141,7 @@ assert_expression_payload::main({payload: payload, attributes: attributes, vars:
 			</munit-tools:assert>
 		</munit:validation>
 	</munit:test>
-	<munit:test name="post:\users\(id)\subscription:application\json:myTrainsSystemApiConfig-test" doc:id="9d9b24b6-c653-4840-94ee-35629b53af81" >
+	<munit:test name="post-users-subscription-positive-test" doc:id="9d9b24b6-c653-4840-94ee-35629b53af81" >
 		<munit:behavior >
 			<munit-tools:mock-when doc:name="Mock mytrains-insert-subscription-flow" doc:id="4aac276d-7c69-43fe-b401-37440cc97ca9" processor="flow-ref">
 				<munit-tools:with-attributes >
@@ -175,7 +175,7 @@ assert_expression_payload::main({payload: payload, attributes: attributes, vars:
 			</munit-tools:assert>
 		</munit:validation>
 	</munit:test>
-	<munit:test name="get:\users\(id)\subscription\(subid):myTrainsSystemApiConfig-test" doc:id="d8834aa1-74f8-4583-aebd-cfb8dca86d84" >
+	<munit:test name="get-users-subscription-by-subid-positive-test" doc:id="d8834aa1-74f8-4583-aebd-cfb8dca86d84" >
 		<munit:behavior >
 			<munit-tools:mock-when doc:name="Mock mytrains-retrieve-subscription-bysubid-flow" doc:id="ad033ea6-2d6c-4e53-b1c7-2ba1a1acc5a4" processor="flow-ref">
 				<munit-tools:with-attributes >
@@ -210,7 +210,7 @@ assert_expression_payload::main({payload: payload, attributes: attributes, vars:
 			</munit-tools:assert>
 		</munit:validation>
 	</munit:test>
-	<munit:test name="get:\station:myTrainsSystemApiConfig-test" doc:id="c86f43ba-1dea-4a82-87f4-26f342b74b7f" >
+	<munit:test name="get-station-list-positive-test" doc:id="c86f43ba-1dea-4a82-87f4-26f342b74b7f" >
 		<munit:behavior >
 			<munit-tools:mock-when doc:name="Mock mytrains-retrieve-station-details-flow" doc:id="26b899d1-58dc-49e8-8bb0-4a679b0873cd" processor="flow-ref">
 				<munit-tools:with-attributes >
@@ -287,7 +287,7 @@ assert_expression_payload::main({payload: payload, attributes: attributes, vars:
 			</otherwise>
 		</choice>
 	</flow>
-	<munit:test name="post:\station:application\json:myTrainsSystemApiConfig-test" doc:id="2d0c3db6-a97e-4f1b-aaca-a2bd723cb0d4" >
+	<munit:test name="post-station-details-positive-test" doc:id="2d0c3db6-a97e-4f1b-aaca-a2bd723cb0d4" >
 		<munit:behavior >
 			<munit-tools:mock-when doc:name="Mock mytrains-insert-stationdetails-flow" doc:id="bb68c696-bf37-4043-9886-eab9b05f739e" processor="flow-ref">
 				<munit-tools:with-attributes >

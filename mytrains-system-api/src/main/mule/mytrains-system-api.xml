@@ -10,7 +10,7 @@
                 <http:headers><![CDATA[#[vars.outboundHeaders default {}]]]></http:headers>
             </http:error-response>
         </http:listener>
-        <apikit:router config-ref="myTrainsSystemApiConfig" doc:id="1934798b-207f-4855-a414-ef2361ebf768"/>
+        <apikit:router config-ref="myTrainsSystemApiConfig" doc:id="1934798b-207f-4855-a414-ef2361ebf768" />
         <error-handler>
             <on-error-propagate type="APIKIT:BAD_REQUEST">
                 <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
@@ -185,11 +185,11 @@ output application/json
         <flow-ref doc:name="mytrains-retrieve-subscription-bysubid-flow" doc:id="13e98e96-95c6-4d47-806f-acf212a0514e" name="mytrains-retrieve-subscription-bysubid-flow" />
     </flow>
     <flow name="get:\station:myTrainsSystemApiConfig">
-		<flow-ref doc:name="mytrains-retrieve-station-details-flow" doc:id="af04190d-14ae-41ad-8916-d18f42b652d7" name="mytrains-retrieve-station-details-flow" />
+        <flow-ref doc:name="mytrains-retrieve-station-details-flow" doc:id="af04190d-14ae-41ad-8916-d18f42b652d7" name="mytrains-retrieve-station-details-flow" />
     </flow>
     <flow name="post:\station:application\json:myTrainsSystemApiConfig">
         <flow-ref doc:name="mytrains-insert-stationdetails-flow" doc:id="b45f3485-93fe-42de-a63e-9327f8057930" name="mytrains-insert-stationdetails-flow" />
-		<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
             <ee:message>
                 <ee:set-payload><![CDATA[%dw 2.0
 output application/json
