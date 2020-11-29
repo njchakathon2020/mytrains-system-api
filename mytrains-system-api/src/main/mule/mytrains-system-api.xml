@@ -119,49 +119,6 @@ output application/json
             </on-error-propagate>
         </error-handler>
     </flow>
-    <flow name="delete:\users\(id)\subscription\(subid):myTrainsSystemApiConfig">
-        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core">
-            <ee:variables>
-                <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
-                <ee:set-variable variableName="subid">attributes.uriParams.'subid'</ee:set-variable>
-            </ee:variables>
-        </ee:transform>
-        <flow-ref doc:name="mytrains-user-unsubscribe-flow" doc:id="ab025e4b-f752-4b50-a564-5b9c9d414486" name="mytrains-user-unsubscribe-flow" />
-    </flow>
-    <flow name="get:\users\(id)\subscription:myTrainsSystemApiConfig">
-        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core">
-            <ee:variables>
-                <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
-            </ee:variables>
-        </ee:transform>
-        <flow-ref doc:name="mytrains-retrieve-subscription-flow" doc:id="94b78e65-461a-4944-bdd9-04e657c27b7e" name="mytrains-retrieve-subscription-flow" />
-    </flow>
-    <flow name="get:\users\(id):myTrainsSystemApiConfig">
-        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core">
-            <ee:variables>
-                <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
-            </ee:variables>
-        </ee:transform>
-        <flow-ref doc:name="mytrains-user-retrieve-flow" doc:id="cf9b47e4-eafc-45a0-80b6-62358668b064" name="mytrains-user-retrieve-flow" />
-    </flow>
-    <flow name="post:\users\(id)\subscription:application\json:myTrainsSystemApiConfig">
-        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core">
-            <ee:variables>
-                <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
-            </ee:variables>
-        </ee:transform>
-        <flow-ref doc:name="mytrains-insert-subscription-flow" doc:id="5d723bbc-3dc2-421a-af8e-6f1fe6995715" name="mytrains-insert-subscription-flow" />
-        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
-            <ee:message>
-                <ee:set-payload><![CDATA[%dw 2.0
-output application/json
----
-{
-  message: "Successfully added new Subscription Details"
-}]]></ee:set-payload>
-            </ee:message>
-        </ee:transform>
-    </flow>
     <flow name="post:\users:application\json:myTrainsSystemApiConfig">
         <flow-ref doc:name="mytrains-user-registration-flow" doc:id="1c427e5e-153b-45ed-a048-5832349ec219" name="mytrains-user-registration-flow" />
         <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
@@ -175,15 +132,6 @@ output application/json
             </ee:message>
         </ee:transform>
     </flow>
-    <flow name="get:\users\(id)\subscription\(subid):myTrainsSystemApiConfig">
-        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core">
-            <ee:variables>
-                <ee:set-variable variableName="id">attributes.uriParams.'id'</ee:set-variable>
-                <ee:set-variable variableName="subid">attributes.uriParams.'subid'</ee:set-variable>
-            </ee:variables>
-        </ee:transform>
-        <flow-ref doc:name="mytrains-retrieve-subscription-bysubid-flow" doc:id="13e98e96-95c6-4d47-806f-acf212a0514e" name="mytrains-retrieve-subscription-bysubid-flow" />
-    </flow>
     <flow name="get:\station:myTrainsSystemApiConfig">
         <flow-ref doc:name="mytrains-retrieve-station-details-flow" doc:id="af04190d-14ae-41ad-8916-d18f42b652d7" name="mytrains-retrieve-station-details-flow" />
     </flow>
@@ -196,6 +144,61 @@ output application/json
 ---
 {
   message: "Station details added successfully"
+}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+    </flow>
+    <flow name="delete:\users\(userId)\subscription\(subscriptionId):myTrainsSystemApiConfig">
+        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core">
+            <ee:variables>
+                <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
+                <ee:set-variable variableName="subscriptionId">attributes.uriParams.'subscriptionId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+		<flow-ref doc:name="mytrains-user-unsubscribe-flow" doc:id="a539c9bc-6944-42a9-8882-810191160d29" name="mytrains-user-unsubscribe-flow"/>
+    </flow>
+    <flow name="get:\users\(userId)\subscription:myTrainsSystemApiConfig">
+        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core">
+            <ee:variables>
+                <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+		<flow-ref doc:name="mytrains-retrieve-subscription-flow" doc:id="22e7deb3-03a4-4f72-938f-0bdfa71ef09f" name="mytrains-retrieve-subscription-flow"/>
+    </flow>
+    <flow name="get:\users:myTrainsSystemApiConfig">
+        <flow-ref doc:name="mytrains-retrieve-userid-flow" doc:id="18577811-c352-4474-ae67-9dd4906148e9" name="mytrains-retrieve-userid-flow"/>
+    </flow>
+    <flow name="get:\users\(userId)\subscription\(subscriptionId):myTrainsSystemApiConfig">
+        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core">
+            <ee:variables>
+                <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
+                <ee:set-variable variableName="subscriptionId">attributes.uriParams.'subscriptionId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+		<flow-ref doc:name="mytrains-retrieve-subscription-bysubid-flow" doc:id="0c522f5f-2ebf-4bff-83e6-658607ef7a71" name="mytrains-retrieve-subscription-bysubid-flow"/>
+    </flow>
+    <flow name="get:\users\(userId):myTrainsSystemApiConfig">
+        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core">
+            <ee:variables>
+                <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+		<flow-ref doc:name="mytrains-user-retrieve-flow" doc:id="60e7caa3-e721-47ac-8af9-881e1bc75bba" name="mytrains-user-retrieve-flow"/>
+    </flow>
+    <flow name="post:\users\(userId)\subscription:application\json:myTrainsSystemApiConfig">
+        <ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core">
+            <ee:variables>
+                <ee:set-variable variableName="userId">attributes.uriParams.'userId'</ee:set-variable>
+            </ee:variables>
+        </ee:transform>
+        <flow-ref doc:name="mytrains-insert-subscription-flow" doc:id="ad1ffdf8-fd9a-44ba-92cf-bd0ae562cbfc" name="mytrains-insert-subscription-flow"/>
+		<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{
+  message: "Successfully added new Subscription Details"
 }]]></ee:set-payload>
             </ee:message>
         </ee:transform>

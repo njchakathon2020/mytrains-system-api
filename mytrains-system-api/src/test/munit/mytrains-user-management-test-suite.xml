@@ -51,7 +51,7 @@
 		<munit:behavior >
 			<munit:set-event doc:name="inputPayload" doc:id="7bc9944e-24f2-488f-bc54-b3ba01239b65" >
 				<munit:payload value="#[output application/json --- readUrl('classpath://examples/insert-subscription-input.dwl')]" mediaType="application/json" />
-				<munit:attributes value="#[{uriParams:{'id': &quot;id2344561x46&quot;}}]" />
+				<munit:attributes value="#[{uriParams:{'userId': &quot;id2344561x46&quot;}}]" />
 			</munit:set-event>
 			<munit-tools:mock-when doc:name="mockInsertSubscription" doc:id="fb11cdc6-8c38-43ce-a7d3-ddf3f3162219" processor="db:insert">
 				<munit-tools:with-attributes >
@@ -70,7 +70,7 @@
 	<munit:test name="mytrains-user-unsubscribe-flow-positive-test" doc:id="a1dc3435-4523-4cc8-be3e-bb44b8645724" description="Test">
 		<munit:behavior >
 			<munit:set-event doc:name="attributes" doc:id="ffb572e9-86e0-4e15-8194-f9d9d6a68a50" >
-				<munit:attributes value="#[{uriParams:{'id': &quot;id2344561x46&quot;, &quot;subid&quot;:  5}}]" />
+				<munit:attributes value="#[{uriParams:{'userId': &quot;id2344561x46&quot;, &quot;subscriptionId&quot;:  5}}]" />
 			</munit:set-event>
 			<munit-tools:mock-when doc:name="mockUpdateSubscription" doc:id="b4db9507-0694-44b9-aae1-8a448f6876bf" processor="db:update">
 				<munit-tools:with-attributes >
@@ -89,7 +89,7 @@
 	<munit:test name="mytrains-retrieve-subscription-bysubid-flow-positive-test" doc:id="c9c7bbe7-80b4-4959-8f1b-1b9e4b6c5018" description="Test">
 		<munit:behavior >
 			<munit:set-event doc:name="attributes" doc:id="e77ef0fd-7583-4596-a41b-e9886e387652">
-				<munit:attributes value="#[{uriParams:{'id': &quot;id2344561x46&quot;, &quot;subid&quot;:  5}}]" />
+				<munit:attributes value="#[{uriParams:{'userId': &quot;id2344561x46&quot;, &quot;subscriptionId&quot;:  5}}]" />
 			</munit:set-event>
 			<munit-tools:mock-when doc:name="mockRetrieveSubscription" doc:id="a55b6af8-83e2-4961-a5bc-fac113681f6d" processor="db:select">
 				<munit-tools:with-attributes >
@@ -112,7 +112,7 @@
 	<munit:test name="mytrains-retrieve-subscription-flow-positive-test" doc:id="5add8128-68d9-49ae-b34b-c3ee2d678b2f" description="Test">
 		<munit:behavior >
 			<munit:set-event doc:name="attributes" doc:id="ca0dd68f-b119-4b54-8bdc-74c90548994e" >
-				<munit:attributes value="#[{uriParams:{'id': &quot;id2344561x46&quot;, &quot;subid&quot;:  5}}]" />
+				<munit:attributes value="#[{uriParams:{'userId': &quot;id2344561x46&quot;, &quot;subscriptionId&quot;:  5}}]" />
 			</munit:set-event>
 			<munit-tools:mock-when doc:name="mockRetrieveSubscriptions" doc:id="f4ff2655-e11a-40f9-9e06-93c3a722e0fc" processor="db:select">
 				<munit-tools:with-attributes >
@@ -191,7 +191,7 @@
 		<munit:behavior >
 			<munit:set-event doc:name="inputPayload" doc:id="4d27f435-31aa-4eab-a66c-a2f8b1e3b3a0">
 				<munit:payload value="#[output application/json --- readUrl('classpath://examples/insert-subscription-input.dwl')]" mediaType="application/json" />
-				<munit:attributes value="#[{uriParams:{'id': &quot;id2344561x46&quot;}}]" />
+				<munit:attributes value="#[{uriParams:{'userId': &quot;id2344561x46&quot;}}]" />
 			</munit:set-event>
 			<munit-tools:mock-when doc:name="mockInsertSubscription" doc:id="05e14741-2eb8-48d7-97b4-1449bf74b085" processor="db:insert" >
 				<munit-tools:with-attributes >
@@ -220,7 +220,7 @@
 	<munit:test name="-mytrains-retrieve-subscription-flow-negative-test" doc:id="fc9d1f47-829f-4c14-a15b-a83ad91d2c12" description="Test">
 		<munit:behavior >
 			<munit:set-event doc:name="attributes" doc:id="185e69fb-4afb-4e3c-9e5c-1a99e1588ebb">
-				<munit:attributes value="#[{uriParams:{'id': &quot;id2344561x46&quot;, &quot;subid&quot;:  5}}]" />
+				<munit:attributes value="#[{uriParams:{'userId': &quot;id2344561x46&quot;, &quot;subscriptionId&quot;:  5}}]" />
 			</munit:set-event>
 			<munit-tools:mock-when doc:name="mockRetrieveSubscriptions" doc:id="b3b3fc7e-c9a5-40ad-b3b3-a0b05cf55b26" processor="db:select" >
 				<munit-tools:with-attributes >
@@ -249,7 +249,7 @@
 	<munit:test name="mytrains-retrieve-subscription-bysubid-flow-negative-test" doc:id="5fc045a2-f845-4395-bf21-5fa05b14f796" description="Test">
 		<munit:behavior >
 			<munit:set-event doc:name="attributes" doc:id="36f10f8e-94db-405c-ba20-2d0dcd37147a" >
-				<munit:attributes value="#[{uriParams:{'id': &quot;id2344561x46&quot;, &quot;subid&quot;: 5}}]" />
+				<munit:attributes value="#[{uriParams:{'userId': &quot;id2344561x46&quot;, &quot;subscriptionId&quot;: 5}}]" />
 			</munit:set-event>
 			<munit-tools:mock-when doc:name="mockRetrieveSubscription" doc:id="6ba3c941-969c-4b23-ad56-290209fe0041" processor="db:select">
 				<munit-tools:with-attributes >

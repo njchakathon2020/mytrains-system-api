@@ -117,7 +117,7 @@
     	<dependency>
             <groupId>cd5bf5d6-a7c5-40f7-a8db-9f1046bbc2fd</groupId>
             <artifactId>mytrains-system-api</artifactId>
-            <version>1.0.7</version>
+            <version>1.0.9</version>
             <classifier>raml</classifier>
             <type>zip</type>
         </dependency>

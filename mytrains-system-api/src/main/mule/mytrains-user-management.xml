@@ -28,7 +28,7 @@ http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/m
 		<db:select doc:name="retrieveUser" doc:id="f36473ca-10f6-4a89-8c93-b4fa6ecf434b" config-ref="myTrainsDBConfig">
 			<db:sql ><![CDATA[SELECT * FROM USER WHERE USER_ID = :Id]]></db:sql>
 			<db:input-parameters ><![CDATA[#[{
-	Id: attributes.uriParams.id
+	Id: attributes.uriParams.userId
 }]]]></db:input-parameters>
 		</db:select>
 		<ee:transform doc:name="Java to Json" doc:id="3db157d3-a079-42cf-b9da-a9f8386c2bd9" >
@@ -52,7 +52,7 @@ payload map(object) ->
 		<db:insert doc:name="insertSubscription" doc:id="d5c5f7e0-42a6-42cc-b315-e4e6258266d5" config-ref="myTrainsDBConfig">
 			<db:sql ><![CDATA[INSERT INTO SUBSCRIPTION(USER_ID,SOURCE_LOCATION,DESTINATION_LOCATION,ADVANCE_NOTIFY_TIME_MIN,FROM_TIME,TO_TIME,STATUS_TYPE_ID,CREATION_TIMESTAMP,UPDATED_TIMESTAMP) VALUES (:userID,:orgin,:destination,:notificationTime,:fromTime,:toTime,1,:createdDatetime,:updatedDatetime)]]></db:sql>
 			<db:input-parameters ><![CDATA[#[{
-	userID: message.attributes.uriParams.id,	
+	userID: message.attributes.uriParams.userId,	
 	orgin: message.payload.sourceLocationCode,
 	destination: message.payload.destinationLocationCode,
 	fromTime: message.payload.fromTime, 
@@ -70,7 +70,7 @@ payload map(object) ->
 		<db:select doc:name="retrieveSubscriptions" doc:id="01f73f59-7c64-49c6-8280-3620eb28cbe6" config-ref="myTrainsDBConfig">
 			<db:sql ><![CDATA[SELECT * FROM SUBSCRIPTION WHERE USER_ID = :id AND STATUS_TYPE_ID = 1]]></db:sql>
 			<db:input-parameters ><![CDATA[#[{
-	id: attributes.uriParams.id
+	id: attributes.uriParams.userId
 }]]]></db:input-parameters>
 		</db:select>
 		<ee:transform doc:name="Java to Json" doc:id="b575ad71-b07e-4e92-8edc-c8f332b98062" >
@@ -88,8 +88,8 @@ payload]]></ee:set-payload>
 		<db:select doc:name="retrieveSubscription" doc:id="e9e5ea19-3a30-4f9c-a80c-2f4f12dcc715" config-ref="myTrainsDBConfig">
 			<db:sql ><![CDATA[SELECT * FROM SUBSCRIPTION WHERE USER_ID = :id AND SUBSCRIPTION_ID = :sid AND STATUS_TYPE_ID = 1]]></db:sql>
 			<db:input-parameters ><![CDATA[#[{
-	id: attributes.uriParams.id,
-	sid: attributes.uriParams.subid
+	id: attributes.uriParams.userId,
+	sid: attributes.uriParams.subscriptionId
 }]]]></db:input-parameters>
 		</db:select>
 		<ee:transform doc:name="Java to Json" doc:id="238f1f7a-0b0c-41ca-a563-ca7fb3b4bcaf" >
@@ -107,7 +107,7 @@ payload]]></ee:set-payload>
 		<db:update doc:name="UnSubscribe" doc:id="fb803662-5732-4dae-8054-59509f34b40d" config-ref="myTrainsDBConfig">
 			<db:sql ><![CDATA[UPDATE SUBSCRIPTION SET STATUS_TYPE_ID = 2 WHERE SUBSCRIPTION_ID=:subid]]></db:sql>
 			<db:input-parameters ><![CDATA[#[{
-	subid: attributes.uriParams.subid
+	subid: attributes.uriParams.subscriptionId
 }]]]></db:input-parameters>
 		</db:update>
 		<ee:transform doc:name="Java to Json" doc:id="3fdd19f4-880a-4b97-85ce-ad2579401f9f" >
@@ -121,5 +121,24 @@ output application/json
 			</ee:message>
 		</ee:transform>
 		<json-logger:logger doc:name="flowEnd" doc:id="db3a6a48-ea2d-4850-82ca-29e06cd35bb5" config-ref="jsonLoggerConfig" message="Payload at the end of flow"/>
+	</flow>
+	<flow name="mytrains-retrieve-userid-flow" doc:id="b026de51-089c-44ae-9a29-1659992ad37b" >
+		<json-logger:logger doc:name="flowBegin" doc:id="f86a79a3-b773-49a9-b77a-673593a4fe9b" config-ref="jsonLoggerConfig" message="Payload in the start of the flow"/>
+		<db:select doc:name="retrieveUserId" doc:id="e7fa9969-2b2a-44f2-a5f3-856716311f48" config-ref="myTrainsDBConfig">
+			<db:sql ><![CDATA[SELECT USER_ID FROM USER WHERE EMAIL_ID = :username]]></db:sql>
+			<db:input-parameters ><![CDATA[#[{
+	username: attributes.queryParams.username
+}]]]></db:input-parameters>
+		</db:select>
+		<ee:transform doc:name="Transform Message" doc:id="940b36ef-35f1-4964-898b-60a25f2c0130" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+userId: payload[0].USER_ID]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="4ed7fb67-f871-46a1-a379-fb9adb2560e9" message="#[payload]"/>
+		<json-logger:logger doc:name="flowEnd" doc:id="f74d07be-3373-4630-9577-63f369b58e9d" config-ref="jsonLoggerConfig" message="Payload in the end of the flow"/>
 	</flow>
 </mule>
