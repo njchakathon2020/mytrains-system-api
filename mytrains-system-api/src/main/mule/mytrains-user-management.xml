@@ -38,10 +38,10 @@ output application/json
 ---
 payload map(object) ->
 	{
-		FirstName: object.FIRST_NAME,
-		LastName: object.LAST_NAME,
-		PhoneNumber: object.PHONE_NUMBER,
-		EmailID: object.EMAIL_ID
+		firstName: object.FIRST_NAME,
+		lastName: object.LAST_NAME,
+		phone: object.PHONE_NUMBER,
+		email: object.EMAIL_ID
 	}]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
@@ -78,7 +78,13 @@ payload map(object) ->
 				<ee:set-payload ><![CDATA[%dw 2.0
 output application/json
 ---
-payload]]></ee:set-payload>
+payload map (item) -> {
+	sourceLocationCode: item.SOURCE_LOCATION,
+	destinationLocationCode: item.DESTINATION_LOCATION,
+	fromTime: item.FROM_TIME,
+	toTime: item.TO_TIME, 
+	advanceNotificationMins: item.ADVANCE_NOTIFY_TIME_MIN	
+}]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 		<json-logger:logger doc:name="flowEnd" doc:id="87280138-0c09-4402-b142-3ca085ef0a89" config-ref="jsonLoggerConfig" message="Payload at the end of flow"/>
